@@ -1,46 +1,82 @@
+interface ChannelSound {
+    id: string;
+    time: number;
+}
 export class App {
+    channel1: ChannelSound[] = [];
+    recStartTime: number;
+    isRecording = false;
     constructor() {
         this.start();
     }
     start() {
         document.addEventListener('keydown', (e) => { this.onKeyDown(e) } )
+        document.querySelector('#playBtn').addEventListener('click', () => { this.playChannel1() } );
+        document.querySelector('#recBtn').addEventListener('click', (e: MouseEvent) => { this.recChannel1(e) } );
+    }
+    recChannel1(e: MouseEvent): void {
+        this.recStartTime = e.timeStamp;
+        this.isRecording = true;
+    }
+    playChannel1(): void {
+        this.isRecording = false;
+        const sound = this.channel1[0];
+        this.channel1.forEach( sound => {
+            setTimeout(() => {
+            this.playAudio(sound.id);
+            },
+            sound.time
+            )
+        })
     }
     onKeyDown(e: KeyboardEvent) {
         const key = e.key;
-      
+        const time = e.timeStamp - this.recStartTime;
+        let audioId: string;
         switch(key) {
             case 'q':
-                this.playAudio('boomAudio');
+                audioId = 'boomAudio';
                 break;
             case 'w':
-                this.playAudio('clapAudio');
+                audioId = 'clapAudio';
                 break;
             case 'e':
-                this.playAudio('hihatAudio');
+               audioId = 'hihatAudio';
                 break;
             case 'r':
-                this.playAudio('kickAudio');
+                audioId = 'kickAudio';
                 break;
             case 't':
-                this.playAudio('openhatAudio');
+                audioId = 'openhatAudio';
                 break;
             case 'y':
-                this.playAudio('rideAudio');
+               audioId = 'rideAudio';
                 break;
             case 'u':
-                this.playAudio('snareAudio');
+                audioId = 'snareAudio';
                 break;
             case 'i':
-                this.playAudio('tinkAudio');
+                audioId = 'tinkAudio';
                 break;
             case 'o':
-                this.playAudio('tomAudio');
+                audioId = 'tomAudio';
                 break;
         }
+        this.playAudio(audioId);
+        this.recordSound(audioId, time);
     }
     playAudio(id: string) {
         const clap: HTMLAudioElement = document.querySelector('#' + id);
         clap.currentTime = 0;
         clap.play();
+    }
+    recordSound(id: string, time: number) {
+        if (this.isRecording){
+        const sound: ChannelSound = {
+            id,
+            time
+        }
+        this.channel1.push(sound);
+        }
     }
 }
