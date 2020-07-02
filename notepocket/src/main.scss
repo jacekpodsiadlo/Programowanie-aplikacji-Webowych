@@ -1,0 +1,32 @@
+body {
+  background: lightblue;
+  #newNote {
+    & > * {
+      margin: 10px;
+    }
+  }
+
+  #notes {
+    display: flex;
+    flex-wrap: wrap;
+    .note {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      background: yellow;
+      margin: 20px;
+      padding: 10px;
+      &.isPinned {
+        border-top: 5px solid #000;
+      }
+      h2 {
+        margin: 10px 0;
+      }
+      .deleteBtn {
+        position: absolute;
+        bottom: 10px;
+        cursor: pointer;
+      }
+    }
+  }
+}
