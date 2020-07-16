@@ -1,3 +1,4 @@
+
 export const firebaseConfig = {
   apiKey: 'AIzaSyDAGRYEjbKZqVkSQ_3dW8JAheJpezMnM1E',
   authDomain: 'webchat-a45c1.firebaseapp.com',
