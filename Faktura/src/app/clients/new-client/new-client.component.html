@@ -1,0 +1,18 @@
+<h2>Nowy klient</h2>
+
+<p>Nazwa firmy:<input type="text" [formControl]='nameFormControl'><p>
+<p>NIP:<input type="text" [formControl]='nipFormControl'><p></p>
+<p>Miasto:<input
+  type="text"
+  [formControl]="cityFormControl"
+  [ngClass]= "{
+    'invalid-field': cityFormControl.invalid
+  }"><p></p>
+<p>Kod Pocztowy:<input type="text" ><p></p>
+<p>Adrs:<input type="text"><p></p>
+<button [disabled]='cityFormControl.invalid'>Dodaj klienta</button>
+
+{{ newClient | json}}
+
+<pre>{{ nameFormControl | json}}</pre>
+

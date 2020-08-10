@@ -1,0 +1,10 @@
+<h2>
+  {{ title }}
+</h2>
+<button (click)="onShowListClick()">Show/hide clients</button>
+<ul *ngIf="showClients">
+  <li *ngFor="let client of clientsList">
+      {{ client }}
+  </li>
+</ul>
+<app-new-client></app-new-client>
