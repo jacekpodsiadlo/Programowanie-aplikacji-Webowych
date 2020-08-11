@@ -1,18 +1,58 @@
 <h2>Nowy klient</h2>
+<div class="form">
+<mat-form-field class="200w">
+  <mat-label>Nazwa firmy:</mat-label>
+  <input
+    matInput
+    placeholder="Nazwa firmy"
+    [formControl]="newClientFG.get('name')"
+  />
+</mat-form-field>
 
-<p>Nazwa firmy:<input type="text" [formControl]='nameFormControl'><p>
-<p>NIP:<input type="text" [formControl]='nipFormControl'><p></p>
-<p>Miasto:<input
-  type="text"
-  [formControl]="cityFormControl"
-  [ngClass]= "{
-    'invalid-field': cityFormControl.invalid
-  }"><p></p>
-<p>Kod Pocztowy:<input type="text" ><p></p>
-<p>Adrs:<input type="text"><p></p>
-<button [disabled]='cityFormControl.invalid'>Dodaj klienta</button>
+<mat-form-field class="200w">
+  <mat-label>Nip:</mat-label>
+  <input matInput placeholder="Nip" [formControl]="newClientFG.get('nip')" />
+</mat-form-field>
 
-{{ newClient | json}}
+<mat-form-field class="200w">
+  <mat-label>Miasto:</mat-label>
+  <input
+    matInput
+    placeholder="Miasto"
+    [formControl]="newClientFG.get('city')"
+    [ngClass]="{
+      'invalid-field': newClientFG.get('city').invalid
+    }"
+  />
+  <p></p>
+</mat-form-field>
 
-<pre>{{ nameFormControl | json}}</pre>
+<mat-form-field class="200w">
+  <mat-label>Kod pocztowy:</mat-label>
+  <input
+    matInput
+    placeholder="Kod pocztowy"
+    [formControl]="newClientFG.get('postalcode')"
+  />
+</mat-form-field>
 
+<mat-form-field class="200w">
+  <mat-label>Adres:</mat-label>
+  <input
+    matInput
+    placeholder="Adres"
+    [formControl]="newClientFG.get('adress')"
+  />
+</mat-form-field class="200w">
+<button
+  mat-raised-button
+  color="primary"
+  [disabled]="newClientFG.invalid"
+  (click)="onClientSave()"
+>
+  Dodaj klienta
+</button>
+</div>
+<pre>{{ newClientFG.value | json }}</pre>
+
+{{ newClient | json }}
